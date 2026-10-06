@@ -72,6 +72,34 @@
     .contact-line a svg { width: 16px; height: 16px; flex: 0 0 auto; }
     .contact-line .dot { color: var(--muted); }
 
+    /* Floating popup under each contact link. It's a child of .contact-item
+       (with padding-top instead of a margin) so there's no dead gap between
+       the link and the popup — moving the pointer down onto the Copy button
+       never leaves the item, so it doesn't close underneath you. */
+    .contact-item { position: relative; display: inline-block; }
+    .popover {
+      position: absolute; top: 100%; left: 0; z-index: 20; padding-top: 8px;
+      visibility: hidden; opacity: 0; transition: opacity 0.12s ease;
+    }
+    .contact-item:hover .popover,
+    .contact-item:focus-within .popover,
+    .contact-item.open .popover { visibility: visible; opacity: 1; }
+    .popover-box {
+      display: flex; align-items: center; gap: 10px; width: max-content;
+      max-width: min(340px, calc(100vw - 32px));
+      background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      padding: 8px 8px 8px 12px; font-size: 13px; line-height: 1.4;
+    }
+    .popover-text { overflow-wrap: anywhere; }
+    .copy-btn {
+      flex: 0 0 auto; font: inherit; font-size: 12px; font-weight: 600;
+      color: #fff; background: var(--accent); border: none; border-radius: 6px;
+      padding: 5px 10px; cursor: pointer;
+    }
+    .copy-btn:hover { opacity: 0.9; }
+
     .bio { margin-bottom: 40px; max-width: 60ch; }
 
     .btn {
@@ -117,20 +145,44 @@
     <div class="cv-paper">
       <h1>George Hildick-Smith</h1>
       <p class="contact-line">
-        <a href="mailto:3ghildicksmith3@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
-          Email
-        </a>
+        <span class="contact-item">
+          <a href="mailto:3ghildicksmith3@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+            Email
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">3ghildicksmith3@gmail.com</span>
+              <button type="button" class="copy-btn" data-copy="3ghildicksmith3@gmail.com" aria-label="Copy email address">Copy</button>
+            </span>
+          </span>
+        </span>
         <span class="dot">&middot;</span>
-        <a href="https://linkedin.com/in/george-hildick-smith" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.06 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.11V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23H8V8z"/></svg>
-          LinkedIn
-        </a>
+        <span class="contact-item">
+          <a href="https://linkedin.com/in/george-hildick-smith" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.06 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.11V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23H8V8z"/></svg>
+            LinkedIn
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">https://linkedin.com/in/george-hildick-smith</span>
+              <button type="button" class="copy-btn" data-copy="https://linkedin.com/in/george-hildick-smith" aria-label="Copy LinkedIn link">Copy</button>
+            </span>
+          </span>
+        </span>
         <span class="dot">&middot;</span>
-        <a href="https://github.com/g323hs" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-          GitHub
-        </a>
+        <span class="contact-item">
+          <a href="https://github.com/g323hs" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">https://github.com/g323hs</span>
+              <button type="button" class="copy-btn" data-copy="https://github.com/g323hs" aria-label="Copy GitHub link">Copy</button>
+            </span>
+          </span>
+        </span>
       </p>
 
       <p class="bio">
@@ -231,5 +283,81 @@
       </div>
     </div>
   </main>
+  <script>
+    (function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll(".contact-item"));
+      // No hover on a touch screen, so there a first tap opens the popup
+      // (instead of immediately following the link) and a second tap follows it.
+      var touch = window.matchMedia("(hover: none)").matches;
+
+      function closeAll() {
+        items.forEach(function (i) { i.classList.remove("open"); });
+      }
+
+      // Keeps the popup inside the viewport when its link sits near the right
+      // edge (common on a phone, where the links wrap onto their own lines).
+      function place(item) {
+        var pop = item.querySelector(".popover");
+        pop.style.transform = "";
+        var over = pop.getBoundingClientRect().right - (window.innerWidth - 12);
+        if (over > 0) pop.style.transform = "translateX(" + -over + "px)";
+      }
+
+      items.forEach(function (item) {
+        var link = item.querySelector("a");
+        item.addEventListener("mouseenter", function () { place(item); });
+        link.addEventListener("focus", function () { place(item); });
+        if (touch) {
+          link.addEventListener("click", function (e) {
+            if (item.classList.contains("open")) return;
+            e.preventDefault();
+            closeAll();
+            item.classList.add("open");
+            place(item);
+          });
+        }
+      });
+
+      function copyText(text, done) {
+        function fallback() {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); } catch (err) { /* nothing more to try */ }
+          ta.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else {
+          fallback();
+        }
+      }
+
+      document.addEventListener("click", function (e) {
+        var btn = e.target.closest(".copy-btn");
+        if (btn) {
+          var label = btn.getAttribute("data-label") || btn.textContent;
+          btn.setAttribute("data-label", label);
+          copyText(btn.getAttribute("data-copy"), function () {
+            btn.textContent = "Copied!";
+            setTimeout(function () { btn.textContent = label; }, 1500);
+          });
+        } else if (!e.target.closest(".contact-item")) {
+          closeAll();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeAll();
+          if (document.activeElement) document.activeElement.blur();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
