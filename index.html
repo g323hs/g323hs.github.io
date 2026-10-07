@@ -3,17 +3,398 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>George Hildick-Smith</title>
-  <meta http-equiv="refresh" content="0; url=https://george-hs.duckdns.org/" />
-  <link rel="canonical" href="https://george-hs.duckdns.org/" />
-  <script>window.location.replace("https://george-hs.duckdns.org/");</script>
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+  <title>George Hildick-Smith — CV</title>
+  <meta name="description" content="CV of George Hildick-Smith: Oxford MMSC graduate and Durham First Class mathematics graduate, with skills in Python, R, Java and SQL." />
+  <meta property="og:title" content="George Hildick-Smith — CV" />
+  <meta property="og:description" content="Oxford MMSC graduate and Durham First Class mathematics graduate. Python, R, Java, SQL." />
+  <meta property="og:type" content="profile" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 480px; margin: 80px auto; padding: 0 24px; color: #1a1a1a; }
-    a { color: #2563eb; }
-    @media (prefers-color-scheme: dark) { body { background: #111317; color: #f2f2f2; } a { color: #60a5fa; } }
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #5f5f5f;
+      --accent: #2563eb;
+      --border: #e5e5e5;
+      --card-bg: #f8f8f8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111317;
+        --text: #f2f2f2;
+        --muted: #a0a0a0;
+        --accent: #60a5fa;
+        --border: #2a2d33;
+        --card-bg: #1a1c20;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    main { padding: 24px 0 80px; }
+
+    h1 { font-size: 32px; margin: 0 0 8px; }
+    h2 { font-size: 22px; margin: 40px 0 16px; }
+    h3 { font-size: 17px; margin: 0 0 6px; }
+
+    .cv-paper {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin: 32px 0 48px;
+    }
+
+    .contact-line {
+      margin: 0 0 32px;
+      font-size: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-line a { display: inline-flex; align-items: center; gap: 6px; }
+    .contact-line a svg { width: 16px; height: 16px; flex: 0 0 auto; }
+    .contact-line .dot { color: var(--muted); }
+
+    /* Floating popup under each contact link. It's a child of .contact-item
+       (with padding-top instead of a margin) so there's no dead gap between
+       the link and the popup — moving the pointer down onto the Copy button
+       never leaves the item, so it doesn't close underneath you. */
+    .contact-item { position: relative; display: inline-block; }
+    .popover {
+      position: absolute; top: 100%; left: 0; z-index: 20; padding-top: 8px;
+      visibility: hidden; opacity: 0; transition: opacity 0.12s ease;
+    }
+    .contact-item:hover .popover,
+    .contact-item:focus-within .popover,
+    .contact-item.open .popover { visibility: visible; opacity: 1; }
+    .popover-box {
+      display: flex; align-items: center; gap: 10px; width: max-content;
+      max-width: min(340px, calc(100vw - 32px));
+      background: var(--bg); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      padding: 8px 8px 8px 12px; font-size: 13px; line-height: 1.4;
+    }
+    .popover-text { overflow-wrap: anywhere; }
+    .copy-btn {
+      flex: 0 0 auto; font: inherit; font-size: 12px; font-weight: 600;
+      color: #fff; background: var(--accent); border: none; border-radius: 6px;
+      padding: 5px 10px; cursor: pointer;
+    }
+    .copy-btn:hover { opacity: 0.9; }
+
+    .bio { margin-bottom: 40px; max-width: 60ch; }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+    }
+    .btn:hover { text-decoration: none; opacity: 0.9; }
+
+    .entries { display: flex; flex-direction: column; gap: 12px; }
+
+    .entry {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      background: var(--bg);
+    }
+    .entry-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .entry-header h3 { margin: 0; flex: 1 1 0; min-width: 0; }
+    .entry-date { color: var(--accent); font-size: 14px; font-weight: 600; white-space: nowrap; flex: 0 0 auto; }
+    .entry-sub { color: var(--muted); font-size: 14px; font-style: italic; margin: 2px 0 10px; }
+    .entry-details { margin: 0; padding-left: 18px; font-size: 14px; }
+    .entry-details li { margin-bottom: 4px; }
+    .entry-details li:last-child { margin-bottom: 0; }
+
+    .skills-group { margin-bottom: 20px; }
+    .skills-group h3 { font-size: 15px; color: var(--muted); font-weight: 500; margin-bottom: 8px; }
+
+    @media (max-width: 600px) {
+      .cv-paper { padding: 20px 16px; }
+      .cv-paper h1 { font-size: 24px; }
+      .contact-line { gap: 8px; font-size: 14px; }
+      .contact-line .dot { display: none; }
+      .btn { display: block; text-align: center; }
+    }
+    .site-note { text-align: center; font-size: 13px; color: var(--muted); margin: 0 0 96px; }
   </style>
+  <script>
+    // This page forwards to george-hs.duckdns.org when that site is up. Loading its icon proves the
+    // site is really serving (a down server or an error page can't be loaded as an image), so if the
+    // check fails or takes more than a few seconds, the CV below is shown instead.
+    (function () {
+      var root = document.documentElement;
+      root.className += " checking";
+      var done = false;
+      function show() { if (done) return; done = true; root.className = root.className.replace(/\s*checking/, ""); }
+      var img = new Image();
+      var timer = setTimeout(show, 2500);
+      img.onload = function () {
+        if (done) return;
+        done = true; clearTimeout(timer);
+        window.location.replace("https://george-hs.duckdns.org/");
+      };
+      img.onerror = function () { clearTimeout(timer); show(); };
+      img.src = "https://george-hs.duckdns.org/favicon.svg?check=" + Date.now();
+      setTimeout(show, 4000); // a last safety net: never leave the page blank
+    })();
+  </script>
+  <style>html.checking body { visibility: hidden; }</style>
 </head>
 <body>
-  <p>Taking you to <a href="https://george-hs.duckdns.org/">george-hs.duckdns.org</a>&hellip;</p>
+  <main class="container">
+    <div class="cv-paper">
+      <h1>George Hildick-Smith</h1>
+      <p class="contact-line">
+        <span class="contact-item">
+          <a href="https://george-hs.duckdns.org" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">https://george-hs.duckdns.org</span>
+              <button type="button" class="copy-btn" data-copy="https://george-hs.duckdns.org" aria-label="Copy website link">Copy</button>
+            </span>
+          </span>
+        </span>
+        <span class="dot">&middot;</span>
+        <span class="contact-item">
+          <a href="mailto:3ghildicksmith3@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+            Email
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">3ghildicksmith3@gmail.com</span>
+              <button type="button" class="copy-btn" data-copy="3ghildicksmith3@gmail.com" aria-label="Copy email address">Copy</button>
+            </span>
+          </span>
+        </span>
+        <span class="dot">&middot;</span>
+        <span class="contact-item">
+          <a href="https://linkedin.com/in/george-hildick-smith" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.06 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8 8h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.11V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23H8V8z"/></svg>
+            LinkedIn
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">https://linkedin.com/in/george-hildick-smith</span>
+              <button type="button" class="copy-btn" data-copy="https://linkedin.com/in/george-hildick-smith" aria-label="Copy LinkedIn link">Copy</button>
+            </span>
+          </span>
+        </span>
+        <span class="dot">&middot;</span>
+        <span class="contact-item">
+          <a href="https://github.com/g323hs" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub
+          </a>
+          <span class="popover">
+            <span class="popover-box">
+              <span class="popover-text">https://github.com/g323hs</span>
+              <button type="button" class="copy-btn" data-copy="https://github.com/g323hs" aria-label="Copy GitHub link">Copy</button>
+            </span>
+          </span>
+        </span>
+      </p>
+
+      <p class="bio">
+        Oxford MMSC graduate and Durham First Class mathematics graduate, with a
+        strong quantitative and computational foundation and practical programming skills in
+        Python, R, Java, and SQL. Focused on applying mathematical modelling and rigorous
+        problem solving to practical problems that rely on data. Experienced in building
+        automated software tools and data analysis systems.
+      </p>
+
+      <a class="btn" href="cv.pdf">Download as PDF</a>
+
+      <h2>Education</h2>
+      <div class="entries">
+        <div class="entry">
+          <div class="entry-header">
+            <h3>Masters in Mathematical Modelling and Scientific Computing (MMSC)</h3>
+            <span class="entry-date">10/2025&ndash;09/2026</span>
+          </div>
+          <div class="entry-sub">University of Oxford, Corpus Christi College</div>
+          <ul class="entry-details">
+            <li>Distinction overall, with written components averaging 84% and a weighted average mark of 75%.</li>
+            <li>Awarded an industrially funded scholarship by the Mathematical Institute for exceptional academic merit.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="entry-header">
+            <h3>BSc Mathematics (G100)</h3>
+            <span class="entry-date">09/2022&ndash;07/2025</span>
+          </div>
+          <div class="entry-sub">Durham University, Hatfield College</div>
+          <ul class="entry-details">
+            <li>First Class Honours, with an average of 84%.</li>
+            <li>Awarded the Baxter Prize (2023) and named College Scholar (2023, 2024).</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="entry-header">
+            <h3>A-Levels</h3>
+            <span class="entry-date">09/2020&ndash;07/2022</span>
+          </div>
+          <div class="entry-sub">Brighton Hove and Sussex Sixth Form College</div>
+          <ul class="entry-details">
+            <li>Mathematics, Further Mathematics, Physics, Computer Science &mdash; A* in all.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="entry-header">
+            <h3>GCSEs &amp; AS-Level</h3>
+            <span class="entry-date">09/2015&ndash;07/2020</span>
+          </div>
+          <div class="entry-sub">Warden Park Secondary Academy</div>
+          <ul class="entry-details">
+            <li>AS-Level Computer Science &mdash; A.</li>
+            <li>9s &mdash; Mathematics, Further Mathematics, Physics, Computer Science, Finance, Biology, Chemistry, Graphics, Geography.</li>
+            <li>7s &mdash; Spanish, English Literature, English Language.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Experience</h2>
+      <div class="entries">
+        <div class="entry">
+          <div class="entry-header">
+            <h3>Audit Internship</h3>
+            <span class="entry-date">05/2024&ndash;07/2024</span>
+          </div>
+          <div class="entry-sub">PricewaterhouseCoopers</div>
+          <ul class="entry-details">
+            <li>Independently designed and built a software tool to automate account balance verification and generate detailed summary reports, eliminating substantial manual work and improving accuracy across all future engagements.</li>
+            <li>Achieved two ACCA qualifications (Financial Accounting, Management Accounting) during the internship.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="entry-header">
+            <h3>Online Tutor</h3>
+            <span class="entry-date">02/2023&ndash;Current</span>
+          </div>
+          <div class="entry-sub">MyTutor</div>
+          <ul class="entry-details">
+            <li>Tutored 10+ students across GCSE, A-level, and university level in Mathematics, Physics, Computer Science, and programming, consistently supporting measurable grade improvements.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Skills</h2>
+      <div class="skills-group">
+        <h3>Mathematical &amp; analytical</h3>
+        <p>Mathematical modelling, quantitative thinking, data analysis, problem solving</p>
+      </div>
+      <div class="skills-group">
+        <h3>Programming</h3>
+        <p>Python, R, Java, SQL</p>
+      </div>
+      <div class="skills-group">
+        <h3>Other</h3>
+        <p>Communication</p>
+      </div>
+    </div>
+    <p class="site-note">&copy; 2026 George Hildick-Smith. All rights reserved.</p>
+  </main>
+  <script>
+    (function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll(".contact-item"));
+      // No hover on a touch screen, so there a first tap opens the popup
+      // (instead of immediately following the link) and a second tap follows it.
+      var touch = window.matchMedia("(hover: none)").matches;
+
+      function closeAll() {
+        items.forEach(function (i) { i.classList.remove("open"); });
+      }
+
+      // Keeps the popup inside the viewport when its link sits near the right
+      // edge (common on a phone, where the links wrap onto their own lines).
+      function place(item) {
+        var pop = item.querySelector(".popover");
+        pop.style.transform = "";
+        var over = pop.getBoundingClientRect().right - (window.innerWidth - 12);
+        if (over > 0) pop.style.transform = "translateX(" + -over + "px)";
+      }
+
+      items.forEach(function (item) {
+        var link = item.querySelector("a");
+        item.addEventListener("mouseenter", function () { place(item); });
+        link.addEventListener("focus", function () { place(item); });
+        if (touch) {
+          link.addEventListener("click", function (e) {
+            if (item.classList.contains("open")) return;
+            e.preventDefault();
+            closeAll();
+            item.classList.add("open");
+            place(item);
+          });
+        }
+      });
+
+      function copyText(text, done) {
+        function fallback() {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); } catch (err) { /* nothing more to try */ }
+          ta.remove();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else {
+          fallback();
+        }
+      }
+
+      document.addEventListener("click", function (e) {
+        var btn = e.target.closest(".copy-btn");
+        if (btn) {
+          var label = btn.getAttribute("data-label") || btn.textContent;
+          btn.setAttribute("data-label", label);
+          copyText(btn.getAttribute("data-copy"), function () {
+            btn.textContent = "Copied!";
+            setTimeout(function () { btn.textContent = label; }, 1500);
+          });
+        } else if (!e.target.closest(".contact-item")) {
+          closeAll();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeAll();
+          if (document.activeElement) document.activeElement.blur();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
