@@ -139,6 +139,11 @@
       .btn { display: block; text-align: center; }
     }
     .site-note { text-align: center; font-size: 13px; color: var(--muted); margin: 0 0 96px; }
+    .entry-sub { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 16px; flex-wrap: wrap; }
+    .entry-loc { white-space: nowrap; }
+    .skill-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .skill-chip { border: 1px solid var(--accent); color: var(--accent); border-radius: 4px; padding: 10px 12px; font-size: 14px; line-height: 1.3; }
+    @media (max-width: 640px) { .skill-chips { grid-template-columns: repeat(2, 1fr); } }
   </style>
   <script>
     // This page forwards to george-hs.duckdns.org when that site is up. Loading its icon proves the
@@ -238,10 +243,12 @@
             <h3>Masters in Mathematical Modelling and Scientific Computing (MMSC)</h3>
             <span class="entry-date">10/2025&ndash;09/2026</span>
           </div>
-          <div class="entry-sub">University of Oxford, Corpus Christi College</div>
+          <div class="entry-sub"><span>University of Oxford, Corpus Christi College</span><span class="entry-loc">Oxford&mdash;OX1 4JF</span></div>
           <ul class="entry-details">
             <li>Distinction overall, with written components averaging 84% and a weighted average mark of 75%.</li>
             <li>Awarded an industrially funded scholarship by the Mathematical Institute for exceptional academic merit.</li>
+            <li>President of Corpus Christi College Running Club (2026).</li>
+            <li>Member of Keble College Badminton Team (2026).</li>
           </ul>
         </div>
         <div class="entry">
@@ -249,10 +256,11 @@
             <h3>BSc Mathematics (G100)</h3>
             <span class="entry-date">09/2022&ndash;07/2025</span>
           </div>
-          <div class="entry-sub">Durham University, Hatfield College</div>
+          <div class="entry-sub"><span>Durham University, Hatfield College</span><span class="entry-loc">Durham&mdash;DH1 3RQ</span></div>
           <ul class="entry-details">
             <li>First Class Honours, with an average of 84%.</li>
             <li>Awarded the Baxter Prize (2023) and named College Scholar (2023, 2024).</li>
+            <li>Captain of Hatfield Badminton Men&rsquo;s team (2023&ndash;2025).</li>
           </ul>
         </div>
         <div class="entry">
@@ -260,7 +268,7 @@
             <h3>A-Levels</h3>
             <span class="entry-date">09/2020&ndash;07/2022</span>
           </div>
-          <div class="entry-sub">Brighton Hove and Sussex Sixth Form College</div>
+          <div class="entry-sub"><span>Brighton Hove and Sussex Sixth Form College</span><span class="entry-loc">Hove&mdash;BNH</span></div>
           <ul class="entry-details">
             <li>Mathematics, Further Mathematics, Physics, Computer Science &mdash; A* in all.</li>
           </ul>
@@ -270,7 +278,7 @@
             <h3>GCSEs &amp; AS-Level</h3>
             <span class="entry-date">09/2015&ndash;07/2020</span>
           </div>
-          <div class="entry-sub">Warden Park Secondary Academy</div>
+          <div class="entry-sub"><span>Warden Park Secondary Academy</span><span class="entry-loc">Haywards Heath&mdash;WSX</span></div>
           <ul class="entry-details">
             <li>AS-Level Computer Science &mdash; A.</li>
             <li>9s &mdash; Mathematics, Further Mathematics, Physics, Computer Science, Finance, Biology, Chemistry, Graphics, Geography.</li>
@@ -279,17 +287,18 @@
         </div>
       </div>
 
-      <h2>Experience</h2>
+      <h2>Work History</h2>
       <div class="entries">
         <div class="entry">
           <div class="entry-header">
             <h3>Audit Internship</h3>
             <span class="entry-date">05/2024&ndash;07/2024</span>
           </div>
-          <div class="entry-sub">PricewaterhouseCoopers</div>
+          <div class="entry-sub"><span>PricewaterhouseCoopers</span><span class="entry-loc">Guernsey&mdash;GY1 4ND</span></div>
           <ul class="entry-details">
             <li>Independently designed and built a software tool to automate account balance verification and generate detailed summary reports, eliminating substantial manual work and improving accuracy across all future engagements.</li>
             <li>Achieved two ACCA qualifications (Financial Accounting, Management Accounting) during the internship.</li>
+            <li>Utilised Excel extensively for data analysis and reporting, contributing to accurate and timely audit deliverables.</li>
           </ul>
         </div>
         <div class="entry">
@@ -297,25 +306,23 @@
             <h3>Online Tutor</h3>
             <span class="entry-date">02/2023&ndash;Current</span>
           </div>
-          <div class="entry-sub">MyTutor</div>
+          <div class="entry-sub"><span>MyTutor</span><span class="entry-loc">Online</span></div>
           <ul class="entry-details">
             <li>Tutored 10+ students across GCSE, A-level, and university level in Mathematics, Physics, Computer Science, and programming, consistently supporting measurable grade improvements.</li>
+            <li>Designed tailored lesson programmes for each student, drawing on a broad subject knowledge base to connect material to real-world applications.</li>
+            <li>Built strong rapport with students and parents; adapted teaching approaches to individual learning styles using computational tools to make abstract ideas accessible.</li>
           </ul>
         </div>
       </div>
 
       <h2>Skills</h2>
-      <div class="skills-group">
-        <h3>Mathematical &amp; analytical</h3>
-        <p>Mathematical modelling, quantitative thinking, data analysis, problem solving</p>
-      </div>
-      <div class="skills-group">
-        <h3>Programming</h3>
-        <p>Python, R, Java, SQL</p>
-      </div>
-      <div class="skills-group">
-        <h3>Other</h3>
-        <p>Communication</p>
+      <div class="skill-chips">
+        <span class="skill-chip">Mathematical Modelling</span>
+        <span class="skill-chip">Quantitative Thinking</span>
+        <span class="skill-chip">Programming: Python, R, Java, SQL</span>
+        <span class="skill-chip">Data Analysis</span>
+        <span class="skill-chip">Problem Solving</span>
+        <span class="skill-chip">Communication</span>
       </div>
     </div>
     <p class="site-note">&copy; 2026 George Hildick-Smith. All rights reserved.</p>
